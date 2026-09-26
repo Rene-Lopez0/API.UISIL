@@ -1,0 +1,6 @@
+@API.UISIL_HostAddress = http://localhost:5007
+
+GET {{API.UISIL_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
