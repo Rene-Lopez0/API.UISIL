@@ -4,3 +4,17 @@ GET {{API.UISIL_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+
+################################
+# POST
+# Iniciar sesion en base de datos
+################################
+
+POST {{API.UISIL_HostAddress}}/api/InicioSesion
+Content-Type: application/json
+Accept: application/json
+{
+  "Correo": "1",
+  "Contrasena": "1"
+}
