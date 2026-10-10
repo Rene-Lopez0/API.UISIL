@@ -8,9 +8,23 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddScoped<InicioSesionBLL>();
 builder.Services.AddScoped<IniciosSesionDAL>();
-
+builder.Services.AddScoped<UsuariosBLL>();
+builder.Services.AddScoped<UsuariosDAL>();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+
+builder.Services.AddCors(options =>
+{
+
+    options.AddPolicy("PermitirTodos", policy =>
+    {
+        policy.AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+
+});
 
 var app = builder.Build();
 
@@ -19,6 +33,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseCors("PermitirTodos");
 
 app.UseAuthorization();
 

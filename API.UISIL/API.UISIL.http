@@ -15,6 +15,40 @@ POST {{API.UISIL_HostAddress}}/api/InicioSesion
 Content-Type: application/json
 Accept: application/json
 {
-  "Correo": "1",
-  "Contrasena": "1"
+  "Correo": "renlopez09@gmail.com",
+  "Contrasena": "Patito1234"
+}
+
+################################
+# POST
+# Insertar datos de usuarios
+################################
+
+POST {{API.UISIL_HostAddress}}/api/Usuarios
+Content-Type: application/json
+Accept: application/json
+{
+  "Correo": "renlopez09@gmail.com",
+  "Contrasena": "Patito1234",
+  "IdRol":1,
+  "Nombre":"Alonso",
+  "Apellido1":"Pérez",
+  "Apellido2":"Villa Nueva",
+  "FechaNac":"1998-09-05",
+  "Genero":"Masculino",
+  "Telefono":"+506 44666332",
+  "Direccion":"San Rafael de Heredia"
+
+}
+
+################################
+# POST
+# Insertar datos de usuarios
+################################
+
+POST {{API.UISIL_HostAddress}}/api/Usuarios/ObtenerUsuarioPorId
+Content-Type: application/json
+Accept: application/json
+{
+  "IdUsuario": 1
 }
