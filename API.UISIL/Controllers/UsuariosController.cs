@@ -84,6 +84,98 @@ namespace API.UISIL.Controllers
 
         }
 
+        [HttpGet]
+        public Respuesta<List<UsuariosDto>> ObtenerUsuarios()
+        {
+
+            Respuesta<List<UsuariosDto>> respuesta = new Respuesta<List<UsuariosDto>>();
+
+            try
+            {
+
+                var reply = _UsuarioBLL.ObtenerUsuarios();
+
+                if (reply != null)
+                {
+
+                    respuesta = reply;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                respuesta.Ok = false;
+                respuesta.Mensaje = $"Ha ocurrido un error en la capa del controlador UsuariosController en el método ObtenerUsuarios {ex.Message}";
+                respuesta.ValorRetorno = null;
+            }
+
+            return respuesta;
+
+        }
+
+        [HttpPut]
+        public Respuesta<UsuariosDto> ActualizarUsuarioPorId([FromBody] UsuariosDto ObjUsuario)
+        {
+
+            Respuesta<UsuariosDto> respuesta = new Respuesta<UsuariosDto>();
+
+            try
+            {
+
+                var reply = _UsuarioBLL.ActualizarUsuarioPorId(ObjUsuario);
+
+                if (reply != null)
+                {
+
+                    respuesta = reply;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                respuesta.Ok = false;
+                respuesta.Mensaje = $"Ha ocurrido un error en la capa del controlador UsuariosController en el método ActualizarUsuarioPorId {ex.Message}";
+                respuesta.ValorRetorno = null;
+            }
+
+            return respuesta;
+
+        }
+
+        [HttpDelete]
+        public Respuesta<UsuariosDto> EliminarUsuarioPorid([FromBody] UsuariosDto ObjUsuario)
+        {
+
+            Respuesta<UsuariosDto> respuesta = new Respuesta<UsuariosDto>();
+
+            try
+            {
+
+                var reply = _UsuarioBLL.EliminarUsuarioPorId(ObjUsuario);
+
+                if (reply != null)
+                {
+
+                    respuesta = reply;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                respuesta.Ok = false;
+                respuesta.Mensaje = $"Ha ocurrido un error en la capa del controlador UsuariosController en el método EliminarUsuarioPorid {ex.Message}";
+                respuesta.ValorRetorno = null;
+            }
+
+            return respuesta;
+
+        }
 
 
     }
