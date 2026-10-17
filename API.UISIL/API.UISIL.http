@@ -52,3 +52,49 @@ Accept: application/json
 {
   "IdUsuario": 1
 }
+
+################################
+# GET
+# Obtener todos los usuarios
+################################
+GET {{API.UISIL_HostAddress}}/api/Usuarios
+Accept: application/json
+
+###
+
+################################
+# PUT
+# Actualiza usuarios por IdUsuario
+################################
+
+PUT {{API.UISIL_HostAddress}}/api/Usuarios/
+Content-Type: application/json
+Accept: application/json
+{
+  "IdUsuario":2,
+  "Correo": "PRUEBAS",
+  "Contrasena": "234",
+  "IdRol":1,
+  "Nombre":"ADMIN",
+  "Apellido1":"ADMIN",
+  "Apellido2":"PRUEBA",
+  "FechaNac":"1998-09-05",
+  "Genero":"NO BINARIO",
+  "Telefono":"+506 44666332",
+  "Direccion":"DATA VOLATIL"
+
+}
+
+
+################################
+# DELETE
+# Elimina usuarios por IdUsuario
+################################
+
+DELETE {{API.UISIL_HostAddress}}/api/Usuarios/
+Content-Type: application/json
+Accept: application/json
+{
+  "IdUsuario":1005
+
+}

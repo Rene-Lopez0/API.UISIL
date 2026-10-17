@@ -104,6 +104,115 @@ namespace API.LOGICA.NEGOCIO
 
         }
 
+        public Respuesta<List<UsuariosDto>> ObtenerUsuarios()
+        {
+
+            Respuesta<List<UsuariosDto>> respuesta = new Respuesta<List<UsuariosDto>>();
+
+            try
+            {
+
+                var reply = _UsuarioDAL.ObtenerUsuarios();
+
+                if (reply != null)
+                {
+                    respuesta = reply;
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                respuesta.Ok = false;
+                respuesta.Mensaje = $"Ha ocurrido un error en la capa BLL en el método ObtenerUsuarios {ex.Message}";
+                respuesta.ValorRetorno = null;
+            }
+
+            return respuesta;
+
+
+        }
+
+
+        public Respuesta<UsuariosDto> ActualizarUsuarioPorId(UsuariosDto ObjUsuario)
+        {
+
+            Respuesta<UsuariosDto> respuesta = new Respuesta<UsuariosDto>();
+
+            try
+            {
+
+
+                if (ObjUsuario.Correo != null && ObjUsuario.Contrasena != null && ObjUsuario.FechaNac != null && ObjUsuario.IdRol != 0 && ObjUsuario.Nombre != null &&
+                    ObjUsuario.Apellido1 != null && ObjUsuario.Apellido2 != null && ObjUsuario.Genero != null && ObjUsuario.Telefono != null && ObjUsuario.Direccion != null)
+                {
+
+                    var reply = _UsuarioDAL.ActualizarUsuarioPorId(ObjUsuario);
+
+                    if (reply != null)
+                    {
+                        respuesta = reply;
+
+                    }
+
+
+                }
+                else
+                {
+
+                    respuesta.Ok = false;
+                    respuesta.Mensaje = "Uno o varios de los valores están nulos, favor revisar!";
+                    respuesta.ValorRetorno = null;
+                }
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                respuesta.Ok = false;
+                respuesta.Mensaje = $"Ha ocurrido un error en la capa BLL en el método ActualizarUsuarioPorId {ex.Message}";
+                respuesta.ValorRetorno = null;
+            }
+
+            return respuesta;
+
+
+        }
+
+        public Respuesta<UsuariosDto> EliminarUsuarioPorId(UsuariosDto ObjUsuario)
+        {
+
+            Respuesta<UsuariosDto> respuesta = new Respuesta<UsuariosDto>();
+
+            try
+            {
+
+                var reply = _UsuarioDAL.EliminarUsuarioPorId(ObjUsuario);
+
+                if (reply != null)
+                {
+                    respuesta = reply;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                respuesta.Ok = false;
+                respuesta.Mensaje = $"Ha ocurrido un error en la capa BLL en el método EliminarUsuarioPorId {ex.Message}";
+                respuesta.ValorRetorno = null;
+            }
+
+            return respuesta;
+
+
+        }
 
     }
 }
