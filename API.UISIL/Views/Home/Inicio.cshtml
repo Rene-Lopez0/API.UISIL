@@ -1,0 +1,158 @@
+﻿@model List<Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription>
+
+@using Microsoft.AspNetCore.Mvc.Controllers
+
+@{
+    ViewData["Title"] = "API Explorer";
+
+    Layout = null;
+
+    var controladores = Model
+        .GroupBy(endpoint =>
+            ((ControllerActionDescriptor)
+                endpoint.ActionDescriptor)
+                .ControllerName);
+}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <link href="~/estilos/homecss.css" rel="stylesheet" />
+
+    <meta charset="UTF-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>APITEST - API Explorer</title>
+
+    <!-- Actualizar el catálogo cada 15 segundos -->
+    <meta http-equiv="refresh" content="15">
+
+
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>APITEST</h1>
+
+        <p>
+            Explorador de endpoints de la API
+        </p>
+
+    </header>
+
+    <div class="container">
+
+        <div class="summary">
+
+            <div class="summary-card">
+
+                <h2>@controladores.Count()</h2>
+
+                <p>Controladores disponibles</p>
+
+            </div>
+
+            <div class="summary-card">
+
+                <h2>@Model.Count</h2>
+
+                <p>Endpoints registrados</p>
+
+            </div>
+
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="empty">
+
+                No existen endpoints registrados.
+
+            </div>
+        }
+
+        @foreach (var controlador in controladores)
+        {
+
+            <div class="controller">
+
+                <div class="controller-header">
+
+                    @controlador.Key Controller
+
+                </div>
+
+                @foreach (var endpoint in controlador)
+                {
+
+                    var metodo = endpoint.HttpMethod ?? "ANY";
+
+                    var ruta = "/" +
+                        (endpoint.RelativePath ?? "")
+                        .TrimStart('/');
+
+                    var accion =
+                        ((ControllerActionDescriptor)
+                            endpoint.ActionDescriptor)
+                            .ActionName;
+
+                    <div class="endpoint">
+
+                        <span class="method @metodo">
+
+                            @metodo
+
+                        </span>
+
+                        <div class="route">
+
+                            @if (metodo == "GET"
+                                && !ruta.Contains("{")
+                                && !ruta.Contains("?"))
+                            {
+                                <a href="@ruta"
+                                   target="_blank">
+
+                                    @ruta
+
+                                </a>
+                            }
+                            else
+                            {
+                                <span>@ruta</span>
+                            }
+
+                        </div>
+
+                        <span class="action">
+
+                            @accion
+
+                        </span>
+
+                    </div>
+
+                }
+
+            </div>
+
+        }
+
+    </div>
+
+    <footer>
+
+        APITEST - ASP.NET Core Web API
+
+    </footer>
+
+</body>
+
+</html>
